@@ -40,3 +40,27 @@ class Solution {
         
     }
 }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Minimum Window Substring
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        d1=Counter(t)
+        length=len(set(t))
+        st=0
+        en=0
+        fi=-1
+        fj=len(s)
+        while True:
+            if en < len(s) and length > 0:
+                d1[s[en]] -= 1
+                if d1[s[en]] == 0: length -= 1
+                en += 1
+            elif st < len(s) and length <= 0:
+                if en-st < fj-fi: fj, fi = en, st
+                if d1[s[st]] == 0: length += 1
+                d1[s[st]] += 1
+                st += 1
+            else:
+                break
+        return s[fi:fj] if fi >= 0 else ""
