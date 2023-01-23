@@ -1,0 +1,42 @@
+1. Longest Substring Without Repeating Characters
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        k=0
+        a=""
+        for i in s:
+            if i not in a:
+                a+=i
+                
+            else:
+                a=a[a.index(i)+1:]+i
+            k=max(k,len(a))
+        if(len(s)==0):
+            return 0
+        return k
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+First Unique Character in a String
+class Solution {
+    public int firstUniqChar(String s) {
+        Map<Character,Integer>a=new LinkedHashMap<>();
+        for(int i=0;i<s.length();i++){
+            if(a.containsKey(s.charAt(i))){
+                a.put(s.charAt(i),a.get(s.charAt(i))+1);
+            }
+            else{
+                a.put(s.charAt(i),1);
+            }
+        }
+        
+        Set<Character> keys =a.keySet();
+        for(Character i:keys){
+            if (a.get(i)==1){
+                return s.indexOf(i);
+            }
+        }
+        
+            return -1;
+        
+    }
+}
