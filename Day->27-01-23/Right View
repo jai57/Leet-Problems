@@ -1,0 +1,60 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {    
+    List<List<Integer>> res=new ArrayList<>();
+    Queue<TreeNode>queue=new LinkedList<>();
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if(root==null){
+            return res;
+        }
+        ans.add(root.val);
+        res.add(ans);
+        queue.add(root);
+        
+        while(!queue.isEmpty()){
+            ans = new ArrayList<>();
+            int size=queue.size(); 
+            for(int i=0;i<size;i++){
+                TreeNode curr=queue.poll();
+                if(curr.left!=null){
+                    ans.add(curr.left.val);
+                    queue.add(curr.left);
+                }
+                 if(curr.right!=null){
+                    ans.add(curr.right.val);
+                    queue.add(curr.right);
+
+                }               
+            }
+            if(ans.size()!=0) res.add(ans);
+        }
+        return res;       
+    }
+    List<List<Integer>> res1=new ArrayList<>();
+    List<Integer> fina = new ArrayList<>();
+    public List<Integer> rightSideView(TreeNode root) {
+        res=levelOrder(root);
+        int ju;
+        int l;
+        for(int i=0;i<res.size();i++){
+            l=res.get(i).size()-1;
+            ju=res.get(i).get(l);
+            fina.add(ju);
+        }
+        return fina;
+    }
+}
