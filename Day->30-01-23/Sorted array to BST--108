@@ -1,0 +1,23 @@
+import java.util.*;
+class Solution {
+    public TreeNode bst(int[] nums,int start,int end){
+        if(start>end){
+            return null;
+        }
+       
+        int mid=(start+end)/2;
+        TreeNode nn=new TreeNode(nums[mid]);
+          if(start==end){
+            return nn;
+        }
+        nn.left=bst(nums,start,mid-1);
+        nn.right=bst(nums,mid+1,end);
+        return nn;
+        
+    }
+    public TreeNode sortedArrayToBST(int[] nums) {
+        
+        TreeNode root=bst(nums,0,nums.length-1);
+        return root;
+    }
+}
