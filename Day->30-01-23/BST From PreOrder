@@ -1,0 +1,31 @@
+class Solution {
+    //int index=0;
+    public int getindex(int[]array,int start,int end,int val){
+        int i;
+        for(i=start;i<=end;i++){
+            if(array[i]>val){
+                return i;
+            }
+        }
+        return i;
+    }
+    public TreeNode bst(int[]preorder,int left,int right,int index){
+        if(left>right){
+            return null;
+        }
+        
+        TreeNode nn=new TreeNode(preorder[index]);
+        if(left==right){
+            return nn;
+        }
+        int middle=getindex(preorder,left,right,nn.val);
+        nn.left=bst(preorder,left+1,middle-1,left+1);
+        nn.right=bst(preorder,middle,right,middle);
+        return nn;
+
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode root=bst(preorder,0,preorder.length-1,0);
+        return root;
+    }
+}
