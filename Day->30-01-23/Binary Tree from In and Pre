@@ -1,0 +1,28 @@
+class Solution {
+    int index=0;
+    public int get(int[] inorder,int start,int end,int val){
+        int i=0;
+        for(i=start;i<end;i++){
+            if(inorder[i]==val){
+                return i;
+            }
+        }
+        return i;
+    }
+    public TreeNode inbt(int[] preorder,int[] inorder,int left,int right){
+        
+        if(left>right){
+            return null;
+        }
+        TreeNode nn=new TreeNode(preorder[index++]);
+        int mid=get(inorder,left,right,nn.val);
+        nn.left=inbt(preorder,inorder,left,mid-1);
+        nn.right=inbt(preorder,inorder,mid+1,right);
+        return nn;
+    }
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        TreeNode root=inbt(preorder,inorder,0,preorder.length-1);
+        return root;
+    }
+}
