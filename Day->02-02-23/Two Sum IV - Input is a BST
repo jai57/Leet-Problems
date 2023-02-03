@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        l=[]
+        def find(root):
+            if not root :
+                return 
+            find(root.left)
+            l.append(root.val)
+            find(root.right)
+        find(root)
+        d={}
+        for i in l:
+            if k-i!=i:
+                d[i]=k-i
+        for i in d:
+            if d[i] in d:
+                return True
+        return False
+
+
+    
