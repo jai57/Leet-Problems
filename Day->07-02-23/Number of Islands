@@ -1,0 +1,26 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        int rows=grid.length;
+        int columns=grid[0].length;
+        int ans=0;
+        for(int row=0;row<rows;row++){
+            for(int column=0;column<columns;column++){
+                if(grid[row][column]=='1'){
+                    ans+=1;
+                    change(row,column,grid);
+                }
+            }
+        }
+        return ans;
+    }
+    public void change(int row,int column,char[][] grid){
+        if(row<0 || column<0 || row>=grid.length || column>=grid[0].length || grid[row][column]!='1'){
+            return;
+        }
+        grid[row][column]='*';
+        change(row-1,column,grid);
+        change(row,column-1,grid);
+        change(row+1,column,grid);
+        change(row,column+1,grid);
+    }
+}
